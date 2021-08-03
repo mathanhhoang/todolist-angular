@@ -23,9 +23,9 @@ export class TodosComponent implements OnInit {
 
   onFormSubmit(form : NgForm) {
     // console.log(form);
-    if(form.invalid) return alert("Please enter the text of your todo");
+    if(form.invalid) return alert("Vui lòng nhập công việc");
 
-    this.dataService.addTodo(new Todo(form.value.text));
+    this.dataService.addTodo(new Todo(form.value.title, form.value.text));
     form.reset();
   }
 
@@ -45,6 +45,11 @@ export class TodosComponent implements OnInit {
         this.dataService.updateTodo(index, result)
       }
     })
+  }
+
+  deleteTodo(todo: Todo) {
+    const index = this.todos.indexOf(todo)
+    this.dataService.deleteTodo(index)
   }
 
 }

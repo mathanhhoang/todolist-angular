@@ -3,14 +3,15 @@
   <div class="check-box">
     <i class="material-icons">check</i>
   </div>
-  <div class="toto-text">
+  <div class="todo-text">
+    <div class="todo-title">{{ todo.title }}</div>
     {{ todo.text }}
   </div>
-  <div class="todo-controls-box" (click)="$event.stopPropagation()">
-    <div class="todo-controls-button" (click)="onEditClicked()">
+  <div class="todo-controls-box" appToolTipSingleton (click)="$event.stopPropagation()">
+    <div class="todo-controls-button" appToolTip="Chỉnh sửa" (click)="onEditClicked()">
       <i class="material-icons">edit</i>
     </div>
-    <div class="todo-controls-button is-danger">
+    <div class="todo-controls-button is-danger" appToolTip="Xoá" (click)="onDeleteClicked()">
       <i class="material-icons">delete</i>
     </div>
   </div>
