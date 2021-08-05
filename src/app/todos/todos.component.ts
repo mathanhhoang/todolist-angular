@@ -29,15 +29,18 @@ export class TodosComponent implements OnInit {
     form.reset();
   }
 
-  toggleCompleted(todo : Todo) {
+  toggleCompleted(todo: Todo) {
+    const index = this.todos.indexOf(todo)
     todo.completed = !todo.completed;
+    this.dataService.todoCompleted(index, todo);
   }
 
   editTodo(todo: Todo) {
-    const index = this.todos.indexOf(todo);
+    const index = this.todos.indexOf(todo)
+
     let dialogRef = this.dialog.open(EditTodoDialogComponent, {
       width: '700px',
-      data: todo,
+      data: todo
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -49,7 +52,8 @@ export class TodosComponent implements OnInit {
 
   deleteTodo(todo: Todo) {
     const index = this.todos.indexOf(todo)
-    this.dataService.deleteTodo(index)
+    
+    this.dataService.deleteTodo(index, todo)
   }
 
 }
