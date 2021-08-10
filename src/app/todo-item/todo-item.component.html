@@ -6,12 +6,15 @@
   <div class="todo-text">
     <div class="todo-title">{{ todo.title }}</div>
     {{ todo.text }}
+    <div class="todo-date">
+      Dead line: {{todo.date}}
+    </div>
   </div>
   <div class="todo-controls-box" appToolTipSingleton (click)="$event.stopPropagation()">
-    <div class="todo-controls-button" appToolTip="Chỉnh sửa" (click)="onEditClicked()">
+    <div class="todo-controls-button" appToolTip="Edit" (click)="onEditClicked()">
       <i class="material-icons">edit</i>
     </div>
-    <div class="todo-controls-button is-danger" appToolTip="Xoá" (click)="onDeleteClicked()">
+    <div class="todo-controls-button is-danger" appToolTip="Delete" (click)="onDeleteClicked()">
       <i class="material-icons">delete</i>
     </div>
   </div>

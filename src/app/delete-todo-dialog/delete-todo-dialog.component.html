@@ -1,0 +1,20 @@
+<h1 class="title">Delete</h1>
+<div mat-dialog-content>
+    <h3>Do you want delete todo "{{todo.title}}"?</h3>
+  <form #form="ngForm" (ngSubmit)="onFormSubmit(form)">
+
+    <div class="field is-grouped is-grouped-right">
+      <div class="control">
+        <button type="button" class="button is-light" (click)="close()">Cancel</button>
+      </div>
+
+      <div class="control">
+        <button type="submit" class="button alt-gradient-button">
+          <i class="material-icons">delete</i>
+          Delete
+        </button>
+      </div>
+    </div>
+  </form>
+
+</div>

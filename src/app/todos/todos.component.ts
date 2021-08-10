@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from '../shared/data.service';
 import { Todo } from '../shared/todo.model';
+import { DeleteTodoDialogComponent } from '../delete-todo-dialog/delete-todo-dialog.component';
 
 @Component({
   selector: 'app-todos',
@@ -14,18 +15,23 @@ export class TodosComponent implements OnInit {
 
   todos!: Todo[];
   showValidationErrors !: boolean ;
+  today!: string;
+
 
   constructor(private dataService : DataService, private dialog : MatDialog) { }
 
   ngOnInit(): void {
     this.todos = this.dataService.getAllTodos();
+    this.today = new Date().toISOString().split('T')[0];
   }
 
   onFormSubmit(form : NgForm) {
-    // console.log(form);
-    if(form.invalid) return alert("Vui lòng nhập công việc");
-
-    this.dataService.addTodo(new Todo(form.value.title, form.value.text));
+    console.log(form);
+    if(form.invalid){
+      this.showValidationErrors = true;
+    } return this.showValidationErrors;
+    this.dataService.addTodo(new Todo(form.value.title, form.value.text, form.value.date));
+    
     form.reset();
   }
 
@@ -52,8 +58,17 @@ export class TodosComponent implements OnInit {
 
   deleteTodo(todo: Todo) {
     const index = this.todos.indexOf(todo)
-    
-    this.dataService.deleteTodo(index, todo)
+
+    let dialogRef = this.dialog.open(DeleteTodoDialogComponent, {
+      width: '700px',
+      data: todo
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.dataService.deleteTodo(index, todo)
+      }
+    })
   }
 
 }

@@ -1,4 +1,4 @@
-<h1 class="title">Edit todo</h1>
+<h1 class="title">Edit</h1>
 <div mat-dialog-content>
   <form #form="ngForm" (ngSubmit)="onFormSubmit(form)">
     <div class="field">
@@ -7,8 +7,8 @@
           type="text" 
           class="input" 
           [ngModel]="todo.title" 
-          name="title" placeholder="Type todo text here..."
-          required minlength="2" 
+          name="title" placeholder="Title"
+          required
           #todoTitleField="ngModel">
       </div>
       <div class="control">
@@ -17,25 +17,33 @@
           class="input" 
           [ngModel]="todo.text" 
           name="text" 
-          placeholder="Type todo text here..." 
+          placeholder="Description" 
           required
-          minlength="2" #todoTextField="ngModel">
+          #todoTextField="ngModel">
       </div>
-      <div *ngIf="todoTextField.invalid">
-        <p class="help is-danger" *ngIf="todoTextField.errors?.required">Please enter text</p>
-        <p class="help is-danger" *ngIf="todoTextField.errors?.minlength">Please enter text >2</p>
+      <div class="control">
+          Deadline:
+          <input 
+            type="date" 
+            class="input" 
+            [ngModel]="todo.date" 
+            name="date" 
+            required>
+        </div>
+      <div *ngIf="todoTextField.invalid || todoTitleField.invalid">
+        <p class="help is-danger" *ngIf="todoTextField.errors?.required || todoTitleField.errors?.required">Please enter the text of your todo</p>
       </div>
     </div>
     <br>
     <div class="field is-grouped is-grouped-right">
       <div class="control">
-        <button type="button" class="button is light" (click)="close()">Huỷ</button>
+        <button type="button" class="button is light" (click)="close()">Cancel</button>
       </div>
 
       <div class="control">
         <button type="submit" class="button alt-gradient-button">
           <i class="material-icons">save</i>
-          Lưu
+          Save
         </button>
       </div>
     </div>

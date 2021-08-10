@@ -5,31 +5,39 @@
 <div class="container add-todo-box-container">
   <div class="add-todo-box">
     <form #form="ngForm" (ngSubmit)="onFormSubmit(form)">
-      <h2 class="title is-5">Thêm công việc</h2>
+      <h2 class="title is-5">New Todo</h2>
       <div class="field is-grouped" style="margin: 0;">
         <p class="control is-expanded">
-          <input ngModel 
+          <input ngModel
             #todoTitleField="ngModel" 
             required 
-            minlength="2" name="title" class="input" type="text"
-            placeholder="Tiêu đề">
+            name="title" class="input" type="text"
+            placeholder="Title">
         </p>
         <p class="control is-expanded">
-          <input ngModel #todoTextField="ngModel" 
-            required minlength="2" 
+          <input ngModel
+            #todoTextField="ngModel" 
+            required
             name="text" class="input" type="text"
-            placeholder="Mô tả công việc">
+            placeholder="Description">
         </p>
         <p class="control">
           <button type="submit" class="button alt-gradient-button">
             <i class="material-icons">add</i>
-            Thêm
+            Add
           </button>
         </p>
       </div>
-      <div *ngIf="todoTextField.invalid">
-        <p class="help is-danger" *ngIf="todoTextField.errors?.required">Không được để trống</p>
-        <p class="help is-danger" *ngIf="todoTextField.errors?.minlength">Nhập công việc trên hai kí tự</p>
+      <div *ngIf="todoTitleField.invalid || todoTextField.invalid || showValidationErrors">
+        <p class="help is-danger" *ngIf="todoTitleField.errors?.required || todoTextField.errors?.required">
+          Please enter the text of your todo
+        </p>
+      </div>
+      <div>
+          <p class="control is-expanded">
+              Deadline
+              <input name="date" [(ngModel)]="today" type="date" required>
+          </p>
       </div>
     </form>
   </div>
@@ -38,7 +46,7 @@
 <section class="section">
   <div class="container">
 
-    <div class="totos-list">
+    <div class="todos-list">
       <app-todo-item 
         *ngFor="let todo of todos" 
         [todo]="todo" 
