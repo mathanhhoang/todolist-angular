@@ -39,7 +39,7 @@ export class DataService {
     // this.todos.push(todo)
     this.todos.push({"title" : todo.title, "text" : todo.text,"date" : todo.date, "completed" : false});
     this.pushData(todo);
-    location.reload();
+    
   }
 
   todoCompleted(index: number, todo : Todo) {

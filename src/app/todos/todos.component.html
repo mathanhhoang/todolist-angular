@@ -28,7 +28,7 @@
           </button>
         </p>
       </div>
-      <div *ngIf="todoTitleField.invalid || todoTextField.invalid || showValidationErrors">
+      <div *ngIf="todoTitleField.invalid || todoTextField.invalid">
         <p class="help is-danger" *ngIf="todoTitleField.errors?.required || todoTextField.errors?.required">
           Please enter the text of your todo
         </p>
